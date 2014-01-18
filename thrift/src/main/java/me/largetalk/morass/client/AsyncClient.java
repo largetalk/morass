@@ -1,22 +1,24 @@
 package me.largetalk.morass.client;
 
+/**
+ * Created by largetalk on 1/19/14.
+ */
 import me.largetalk.morass.thrift.Ernie;
 import me.largetalk.morass.thrift.Impression;
 import me.largetalk.morass.thrift.LuckAd;
 import org.apache.thrift.TException;
-import org.apache.thrift.protocol.TBinaryProtocol;
+import org.apache.thrift.protocol.TCompactProtocol;
 import org.apache.thrift.protocol.TProtocol;
+import org.apache.thrift.transport.TFramedTransport;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Created by largetalk on 1/18/14.
- */
-public class Client {
+public class AsyncClient {
     private static Logger logger = LoggerFactory.getLogger(Client.class);
+
     private long startTime, endTime;
 
     public void startClient() {
@@ -24,12 +26,13 @@ public class Client {
 
         TTransport transport;
         try {
-            transport = new TSocket("localhost", 9090);
-            transport.open();
+            transport = new TFramedTransport(new TSocket("localhost", 9090, 300));
+
             System.out.println("client .....");
 
-            TProtocol protocol = new TBinaryProtocol(transport);
+            TProtocol protocol = new TCompactProtocol(transport);
             Ernie.Client client = new Ernie.Client(protocol);
+            transport.open();
 
             for(int i=100; i>0; i--) {
                 int randomInt = (int) (Math.random() * 10);
@@ -52,8 +55,9 @@ public class Client {
     }
 
     public static void main(String[] args) {
+
         logger.debug("begin thrift client");
-        Client client = new Client();
+        AsyncClient client = new AsyncClient();
 
         client.startClient();
     }
