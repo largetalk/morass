@@ -9,11 +9,15 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by largetalk on 1/18/14.
  */
 public class Client {
+    private static Logger logger = LoggerFactory.getLogger(Client.class);
+
     public void startClient() {
         TTransport transport;
         try {
@@ -36,7 +40,9 @@ public class Client {
     }
 
     public static void main(String[] args) {
+        logger.debug("begin thrift client");
         Client client = new Client();
+
         client.startClient();
     }
 }

@@ -11,9 +11,13 @@ import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
 import org.apache.thrift.transport.TTransportException;
 import org.apache.thrift.protocol.TBinaryProtocol.Factory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class Server {
+    private  static Logger logger = LoggerFactory.getLogger(Server.class);
+
     private class InnerServer {
         public void start(){
             try {
@@ -34,8 +38,12 @@ public class Server {
         }
     }
     public static void main(String[] args) {
+        logger.debug("begin main server");
+        //System.setProperty("log4j.configuration", "log4j.properties");
+
         System.out.println("server");
         Server outServer = new Server();
+
         InnerServer server = outServer.new InnerServer();
         server.start();
     }
