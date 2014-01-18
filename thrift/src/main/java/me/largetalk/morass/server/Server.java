@@ -1,9 +1,9 @@
-package me.largetalk.mograss.server;
+package me.largetalk.morass.server;
 
 /**
  * Created by largetalk on 1/18/14.
  */
-import me.largetalk.mograss.thrift.Ernie.Processor;
+import me.largetalk.morass.thrift.Ernie.Processor;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TThreadPoolServer;

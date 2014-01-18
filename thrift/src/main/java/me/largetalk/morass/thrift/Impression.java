@@ -4,7 +4,7 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-package me.largetalk.mograss.thrift;
+package me.largetalk.morass.thrift;
 
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
@@ -12,11 +12,6 @@ import org.apache.thrift.scheme.StandardScheme;
 
 import org.apache.thrift.scheme.TupleScheme;
 import org.apache.thrift.protocol.TTupleProtocol;
-import org.apache.thrift.protocol.TProtocolException;
-import org.apache.thrift.EncodingUtils;
-import org.apache.thrift.TException;
-import org.apache.thrift.async.AsyncMethodCallback;
-import org.apache.thrift.server.AbstractNonblockingServer.*;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -24,9 +19,6 @@ import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.Collections;
 import java.util.BitSet;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class Impression implements org.apache.thrift.TBase<Impression, Impression._Fields>, java.io.Serializable, Cloneable, Comparable<Impression> {
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("Impression");

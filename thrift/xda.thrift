@@ -1,4 +1,4 @@
-namespace java me.largetalk.mograss.thrift
+namespace java me.largetalk.morass.thrift
 
 struct Impression {
   1: string asid,

@@ -1,8 +1,8 @@
-package me.largetalk.mograss.client;
+package me.largetalk.morass.client;
 
-import me.largetalk.mograss.thrift.Ernie;
-import me.largetalk.mograss.thrift.Impression;
-import me.largetalk.mograss.thrift.LuckAd;
+import me.largetalk.morass.thrift.Ernie;
+import me.largetalk.morass.thrift.Impression;
+import me.largetalk.morass.thrift.LuckAd;
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
