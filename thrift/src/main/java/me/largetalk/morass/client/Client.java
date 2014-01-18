@@ -27,15 +27,21 @@ public class Client {
 
             TProtocol protocol = new TBinaryProtocol(transport);
             Ernie.Client client = new Ernie.Client(protocol);
-            Impression impl = new Impression("asid", "pageurl", "ip");
-            LuckAd luckAd = client.bet(impl);
-            System.out.println(luckAd.toString());
+
+            for(int i=10; i>0; i--) {
+                int randomInt = (int) (Math.random() * 10);
+                Impression impl = new Impression(String.valueOf(randomInt) , "pageurl", "ip");
+                LuckAd luckAd = client.bet(impl);
+                System.out.println(luckAd.toString());
+            }
 
             transport.close();
         } catch (TTransportException ex) {
             ex.printStackTrace();
+            logger.error(ex.getMessage());
         } catch (TException ex) {
             ex.printStackTrace();
+            logger.error(ex.getMessage());
         }
     }
 
