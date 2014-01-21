@@ -1,3 +1,5 @@
 thrift/target/
 thrift/.idea/
+Jenigma/target/
+Jenigma/.idea/
 *.log
