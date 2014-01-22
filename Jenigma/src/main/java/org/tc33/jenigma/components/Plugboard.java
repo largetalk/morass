@@ -27,7 +27,7 @@ import java.util.*;
  */
 public class Plugboard extends Permutator {
 
-	private char[] cables = new char[26];
+	private char[] cables = new char[Alphabet.length()];
     
     /**
      * Constructor. This is commented out as it's safer to force users to use 
@@ -47,17 +47,16 @@ public class Plugboard extends Permutator {
      * @param cableEnd1
      * @param cableEnd2
      */
-	public void addCable(char cableEnd1, char cableEnd2) {
-		cableEnd1 = Character.toUpperCase(cableEnd1);
-		cableEnd2 = Character.toUpperCase(cableEnd2);
-		
-		cables[cableEnd1-65] = cableEnd2;
-		cables[cableEnd2-65] = cableEnd1;
+	public Plugboard addCable(char cableEnd1, char cableEnd2) {
+
+		cables[Alphabet.getPos(cableEnd1)] = cableEnd2;
+		cables[Alphabet.getPos(cableEnd2)] = cableEnd1;
+        return this;
 	}
 	
 	public char getSwappedChar(char cableEnd) {
-		cableEnd = Character.toUpperCase(cableEnd);
-		char otherEnd = cables[cableEnd-65];
+
+		char otherEnd = cables[Alphabet.getPos(cableEnd)];
 		if (otherEnd == '\u0000')
 			otherEnd = cableEnd;
 		
@@ -78,7 +77,7 @@ public class Plugboard extends Permutator {
     public void printKey() {
         System.out.println("PT................CT");
         for (int i=0; i < cables.length; i++){
-            System.out.println((char)(i+65) + ".................." + cables[i]);
+            System.out.print(getSwappedChar(Alphabet.revertPos(i)));
         }
     }
 }

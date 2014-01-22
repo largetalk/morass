@@ -89,13 +89,12 @@ public class Enigma {
     public String execute(String input) {
         // Perform operation.
         char inputChar, outputChar;
-        input = input.toUpperCase();
         StringBuilder output = new StringBuilder();
         //to send the correct char position excluding spaces (i inc. spaces)
         int n = 0;
         for (int i = 0; i < input.length(); i++) {
             inputChar = input.charAt(i);
-            if ((inputChar >= 'A') && (inputChar <= 'Z')) {
+            if (Alphabet.isValid(inputChar)) {
                 n++;
 
                 // Put char through the plugboard.
@@ -136,13 +135,13 @@ public class Enigma {
     public void rotateRotors(int charPos) {
         for (int i = 0; i < rotors.length; i++) {
             // This is the number of rotations the smallest rotor has to make for one rotation here.
-            int turns = (int) Math.pow(26, i);
+            int turns = (int) Math.pow(Alphabet.length(), i);
 
             // How many rotations has the smallest rotor made since we last turned?
             int rotorPos = charPos % turns;
 
             // Only rotate if smaller rotors have completed a full revolution.
-            if (rotorPos == (turns - 1)) {
+            if (rotorPos == 0) {
                 rotors[i].rotate();
             }
         }
@@ -163,15 +162,59 @@ public class Enigma {
 
     public static void main(String[] args) {
         System.out.println(Alphabet.getRotorMap());
+        System.out.println(Alphabet.table());
+        System.out.println(Alphabet.getReflectorMap());
+        System.out.println("========");
 
-        Rotor[] rotors = new Rotor[]{Rotor.ROTOR_I, Rotor.ROTOR_II, Rotor.ROTOR_III};
+        Rotor rotor1 = new Rotor(Alphabet.getRotorMap());
+        rotor1.setPosition(5);
+        System.out.println(rotor1);
+        char[] inputs = new char[]{'A', 'B', 'C', 'a', 'b', 'z', '0', '8', '9', 'B', 'C', 'D'};
+        System.out.println(String.valueOf(inputs));
+        StringBuilder outputs = new StringBuilder();
+        for (char c: inputs) {
+            outputs.append(rotor1.execute(c));
+        }
+        System.out.println(outputs.toString());
+        rotor1.setPosition(5);
+        for (char c: outputs.toString().toCharArray()) {
+            System.out.print(rotor1.revert(c));
+        }
+        System.out.println("\n========");
+
+        Reflector reflector1 = new Reflector(Alphabet.getReflectorMap());
+        char[] reflectorIns = new char[]{ 'B', 'C', 'i', 'b', 'y', '0', '8', '9', 'B', 'C'};
+        System.out.println(String.valueOf(reflectorIns));
+        StringBuilder reflectorOuts = new StringBuilder();
+        for (char c: reflectorIns) {
+            reflectorOuts.append(reflector1.getCipherChar(c));
+        }
+        System.out.println(reflectorOuts.toString());
+        for (char c: reflectorOuts.toString().toCharArray()) {
+            System.out.print(reflector1.getCipherChar(c));
+        }
+        System.out.println("\n========");
+
+        Plugboard plugboard1 = new Plugboard();
+        plugboard1.addCable('A', 'T').addCable('U', 'v');
+        plugboard1.printKey();
+        System.out.println("\n========");
+
+
+        Rotor[] rotors = new Rotor[]{Rotor.create(), Rotor.create(), Rotor.create()};
+        char[] startPositions = new char[]{'A', 'A', 'A'};
+        Reflector reflector = Reflector.create();
+        Plugboard plugboard = new Plugboard();
+        plugboard.addCable('A', 'T').addCable('U', 'v');
+
+        /*Rotor[] rotors = new Rotor[]{Rotor.ROTOR_I, Rotor.ROTOR_II, Rotor.ROTOR_III};
         char[] startPositions = new char[]{'A', 'A', 'A'};
         Reflector reflector = Reflector.REFLECTOR_B;
         Plugboard plugboard = new Plugboard();
-        plugboard.addCable('A', 'T');
+        plugboard.addCable('A', 'T');*/
 
         Enigma enigma = new Enigma(rotors, startPositions, plugboard, reflector);
-        String plaintext = "VERYBIGQUESTION";
+        String plaintext = "VERYBIGQUESTIONthisisbeautifule9527";
         String ciphertext = enigma.execute(plaintext);
         System.out.println(plaintext);
         System.out.println(ciphertext);

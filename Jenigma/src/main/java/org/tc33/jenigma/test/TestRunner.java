@@ -32,7 +32,7 @@ import org.tc33.jenigma.components.*;
 public class TestRunner {
 	
 	public static void main(String[] args) {
-
+/*
 		Enigma enigma = new Enigma(new Rotor[]{Rotor.ROTOR_I, Rotor.ROTOR_II, Rotor.ROTOR_III}, 
 								   new char[]{'A','A','A'},
 								   new Plugboard(),
@@ -51,6 +51,6 @@ public class TestRunner {
 		System.out.println("TEST #1: " + (test1 ? "PASSED" : "FAILED"));
 		System.out.println("TEST #2: " + (test2 ? "PASSED" : "FAILED"));
 		System.out.println("-------------------");
-		System.out.println("OVERALL: " + ((test1 && test2) ? "PASSED" : "FAILED"));
+		System.out.println("OVERALL: " + ((test1 && test2) ? "PASSED" : "FAILED"));*/
 	}
 }

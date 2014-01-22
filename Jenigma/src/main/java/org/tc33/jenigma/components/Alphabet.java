@@ -21,6 +21,10 @@ public final class Alphabet {
         return ALPHABET.size();
     }
 
+    public static String table() {
+        return KEYS;
+    }
+
     public static boolean isValid(char c) {
         return ALPHABET.containsKey(c);
     }
@@ -58,7 +62,28 @@ public final class Alphabet {
     }
 
     public static String getReflectorMap() {
-        return KEYS;
+        char[] characters = new char[KEYS.length()];
+        ArrayList<Character> charList = new ArrayList<Character>();
+        for (char ch: KEYS.toCharArray()) {
+            charList.add(ch);
+        }
+
+        Random rnd = new Random();
+        for (int i= 0; i < KEYS.length(); i++) {
+            if (characters[i] == '\u0000') {
+
+                int index = rnd.nextInt(charList.size());
+                while (index == 0) {
+                    index = rnd.nextInt(charList.size());
+                }
+                Character c = charList.get(index);
+                characters[i] = c;
+                characters[getPos(c)] = revertPos(i);
+                charList.remove(index);
+                charList.remove(0);
+            }
+        }
+        return String.valueOf(characters);
     }
 
 }
