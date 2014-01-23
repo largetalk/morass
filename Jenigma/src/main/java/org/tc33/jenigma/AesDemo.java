@@ -159,10 +159,27 @@ public class AesDemo {
         System.out.println("=======================================\n");
     }
     
+        private static void crossLanguage(String password, String iv) {
+        String plaintext = "this string include 1: UPCASE,2: number,3:中文 ";
+        //String password = createPassword(16); //this setting only support 16*8 key length
+        //String iv = createPassword(16);
+        String ciphertext = cbcEncrypt(plaintext, password, iv);
+        String decipheredtext = cbcDecrypt(ciphertext, password, iv);
+        System.out.println("Configuration: AES/CBC/NoPadding ,Algorithm Name: AES ,key/iv length: 16");
+        System.out.println(plaintext);
+        System.out.println(password);
+        System.out.println(iv);
+        System.out.println(ciphertext);
+        System.out.println(decipheredtext);
+        System.out.println("=======================================\n");
+    }
 
     public static void main(String[] args) {
         ecbPKC5Pad16AES();
         cbcNoPad16AES();
+        String password = "5AOCoWvyViND6hMi";
+        String iv = "4kr7okCy0yEEaQ5m";
+        crossLanguage(password, iv);
     }
 
 }
