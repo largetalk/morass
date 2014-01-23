@@ -207,12 +207,6 @@ public class Enigma {
         Plugboard plugboard = new Plugboard();
         plugboard.addCable('A', 'T').addCable('U', 'v');
 
-        /*Rotor[] rotors = new Rotor[]{Rotor.ROTOR_I, Rotor.ROTOR_II, Rotor.ROTOR_III};
-        char[] startPositions = new char[]{'A', 'A', 'A'};
-        Reflector reflector = Reflector.REFLECTOR_B;
-        Plugboard plugboard = new Plugboard();
-        plugboard.addCable('A', 'T');*/
-
         Enigma enigma = new Enigma(rotors, startPositions, plugboard, reflector);
         String plaintext = "VERYBIGQUESTIONthisisbeautifule9527";
         String ciphertext = enigma.execute(plaintext);

@@ -1,12 +1,9 @@
 package org.tc33.jenigma.components;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
 import com.google.common.collect.HashBiMap;
 
-/**
- * Created by largetalk on 1/21/14.
- */
+
 public final class Alphabet {
     private static String KEYS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     private static HashBiMap<Character, Integer> ALPHABET =  HashBiMap.create();

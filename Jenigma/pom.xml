@@ -20,11 +20,6 @@
             <version>15.0</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>com.johnflan.enigma</groupId>
-            <artifactId>JavaEnigma</artifactId>
-            <version>0.5-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
 </project>
