@@ -20,6 +20,13 @@
             <version>15.0</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+	<groupId>commons-codec</groupId>
+	<artifactId>commons-codec</artifactId>
+	<version>1.8</version>
+            <type>jar</type>
+        </dependency>
+            
     </dependencies>
 
 </project>
