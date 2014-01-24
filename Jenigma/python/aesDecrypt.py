@@ -24,8 +24,10 @@ class AesCbcCrypt():
         elif count > length:
             add = (length - (count % length)) + 1
             text += (self.padding * add)
-            self.ciphertext = cryptor.encrypt(text)
-            return b64encode(self.ciphertext)
+
+        self.ciphertext = cryptor.encrypt(text)
+        #for x in self.ciphertext: print ord(x),
+        return b64encode(self.ciphertext)
 
     def decrypt(self, text):
         cryptor = AES.new(self.key, self.mode, self.iv)
@@ -60,6 +62,12 @@ def crossLanguage():
     assert encrpt_data == assert_cipher
     print '=============================='
 
+def test_base64():
+    data = 'this string include 1: UPCASE,2: number '
+    b64 = b64encode(data)
+    print b64, len(b64)
+
+
 if __name__ == '__main__':
-    test()
     crossLanguage()
+    #test_base64()
