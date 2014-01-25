@@ -7,6 +7,7 @@ public class B64Encrypter {
     public static String encrypt(String content) {
         //if (Base64.isBase64(content)) return content;
         try {
+            //return Base64.encodeBase64String(content.getBytes("utf-8"));
             return Base64.encodeBase64URLSafeString(content.getBytes("utf-8"));
         } catch (UnsupportedEncodingException ex) {
             ex.printStackTrace();
@@ -23,9 +24,12 @@ public class B64Encrypter {
     }
     
     public static String decrypt(String content) {
+        System.out.println(content);
         if (!Base64.isBase64(content)) {
             return null;
         }
-        return String.valueOf(Base64.decodeBase64(content));
+
+        byte[] result = Base64.decodeBase64(content);
+        return new String(result);
     }
 }
