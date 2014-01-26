@@ -120,10 +120,133 @@ public class Demo {
 
         return queryStringMap;
     }
+    
+    public static void cookieDemo() {
+        for (int i = 0; i < 1000; i++) {
+            for (int j = 8; j < 20; j++) {
+            CookieEncrypt.encrypt(getRandomString(j), "5AOCoWvyViND6hMi");
+            }
+        }
+        System.out.println(CookieEncrypt.times);
+        System.out.println(CookieEncrypt.plainLength);
+        System.out.println(CookieEncrypt.ciperLength);
+        System.out.println((float) CookieEncrypt.ciperLength/CookieEncrypt.plainLength);
+        
+    }
+    
+    public static void benchmarkCookie() {
+        String[] plainText = {
+            "dzG8hfOsz7wNmfGxq",
+            "NDxJHmWLWYxPlQ4qU",
+            "1y0AlnOjhqAAzhoZjN",
+            "WEeW7VWDq1mS8xfXOZ",
+            "odTYD7ulutROQH9EO9GJpI",
+            "D02znoiDTf6ulQxN0sxFki",
+            "HGXAGfz9nQgzxh3grs9OdxYT",
+            "jcs3KObMOG3B5GXjLtPhqGJE",
+            "NWgPV7pSqTsK5iEVVWRxtU2OItV",
+            "ZC4QsjqcyzVdr66YK40VJRiorpp",
+            "vXzR0aZhyvKnwXUVfyCbTuSwPLLhj",
+            "Cmbg8xINPhHoNhXQX99bVQRvoeaoH",
+            "CjkEW2LKw2pEnJey77Y5cHIPDFi0GMD",
+            "kQilTiKnKr6vbVAzVotbleY6nOzqRym",
+            "8snkh0CW4wXkQnrjkyamyAabD5rbJIz"
+        };
+        
+        long startTime = System.currentTimeMillis();
+        for (int i = 0; i < 10000; i++) {
+            for (String str : plainText) {
+                String tmp = CookieEncrypt.encrypt(str, "5AOCoWvyViND6hMi");
+                CookieEncrypt.Dencrypt(tmp, "5AOCoWvyViND6hMi");
+            }
+        }
+        long endTime = System.currentTimeMillis();
+        String result = String.format("execute %s times and used time: %s ms", CookieEncrypt.times, endTime-startTime);
 
+        System.out.println(result);
+    }
+    
+    public static String getRandomString(int length) { //length表示生成字符串的长度
+    String base = "abcdefghijklmnopqrstuvwxyz0123456789";   
+    Random random = new Random();   
+    StringBuffer sb = new StringBuffer();   
+    for (int i = 0; i < length; i++) {   
+        int number = random.nextInt(base.length());   
+        sb.append(base.charAt(number));   
+    }   
+    return sb.toString();   
+ }  
+
+    public static void cookieCustomDemo() {
+        for (int i = 0; i < 1000; i++) {
+            for (int j = 8; j < 25; j++) {
+                CookieEncrypt.customEncrypt(getRandomString(j), "5AOCoWvy");
+            }
+        }
+        System.out.println(CookieEncrypt.times);
+        System.out.println(CookieEncrypt.plainLength);
+        System.out.println(CookieEncrypt.ciperLength);
+        System.out.println((float) CookieEncrypt.ciperLength / CookieEncrypt.plainLength);
+
+    }
+    
+    public static void benchmarkCustomCookie() {
+                String[] plainText = {
+            "dzG8hfOsz7wNmfGxq",
+            "NDxJHmWLWYxPlQ4qU",
+            "1y0AlnOjhqAAzhoZjN",
+            "WEeW7VWDq1mS8xfXOZ",
+            "odTYD7ulutROQH9EO9GJpI",
+            "D02znoiDTf6ulQxN0sxFki",
+            "HGXAGfz9nQgzxh3grs9OdxYT",
+            "jcs3KObMOG3B5GXjLtPhqGJE",
+            "NWgPV7pSqTsK5iEVVWRxtU2OItV",
+            "ZC4QsjqcyzVdr66YK40VJRiorpp",
+            "vXzR0aZhyvKnwXUVfyCbTuSwPLLhj",
+            "Cmbg8xINPhHoNhXQX99bVQRvoeaoH",
+            "CjkEW2LKw2pEnJey77Y5cHIPDFi0GMD",
+            "kQilTiKnKr6vbVAzVotbleY6nOzqRym",
+            "8snkh0CW4wXkQnrjkyamyAabD5rbJIz"
+        };
+        
+        long startTime = System.currentTimeMillis();
+        for (int i = 0; i < 10000; i++) {
+            for (String str : plainText) {
+                String tmp = CookieEncrypt.customEncrypt(str, "5AOCoWvy");
+                CookieEncrypt.customDencrypt(tmp, "5AOCoWvy");
+            }
+        }
+        long endTime = System.currentTimeMillis();
+        String result = String.format("execute %s times and used time: %s ms", CookieEncrypt.times, endTime-startTime);
+
+        System.out.println(result);
+    }
+
+    public static void test() {
+        String plain = "abcda";getRandomString(100);
+        String cipher = CookieEncrypt.customEncrypt(plain, "5AOCoWvy");
+        String decipher = CookieEncrypt.customDencrypt(cipher, "5AOCoWvy");
+        System.out.println(plain);
+        System.out.println(cipher);
+        System.out.println(decipher);
+        System.out.println(plain.equals(decipher));
+        
+        String wrong_decipher = CookieEncrypt.customDencrypt(cipher, "5AOCouvy");
+        System.out.println(wrong_decipher);
+        System.out.println(plain.equals(wrong_decipher));
+    }
+    
+    
+    
     public static void main(String[] args) {
-        aesDemo();
-        urlBase64Demo();
+        //aesDemo();
+        //urlBase64Demo();
+        //cookieDemo();
+        //benchmarkCookie();
+        //cookieCustomDemo();
+        benchmarkCustomCookie();
+        test();
+
     }
 
 }
