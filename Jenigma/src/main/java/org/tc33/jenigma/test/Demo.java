@@ -223,7 +223,7 @@ public class Demo {
     }
 
     public static void test() {
-        String plain = "abcda";getRandomString(100);
+        String plain = getRandomString(100);
         String cipher = CookieEncrypt.customEncrypt(plain, "5AOCoWvy");
         String decipher = CookieEncrypt.customDencrypt(cipher, "5AOCoWvy");
         System.out.println(plain);
@@ -234,6 +234,11 @@ public class Demo {
         String wrong_decipher = CookieEncrypt.customDencrypt(cipher, "5AOCouvy");
         System.out.println(wrong_decipher);
         System.out.println(plain.equals(wrong_decipher));
+        
+        String wrong_cipher = cipher.replace('A', 'B').replace('t', 'Y');
+        String the_wrong_decipher = CookieEncrypt.customDencrypt(wrong_cipher, "5AOCoWvy");
+        System.out.println(the_wrong_decipher);
+        System.out.println(plain.equals(the_wrong_decipher));
     }
     
     
