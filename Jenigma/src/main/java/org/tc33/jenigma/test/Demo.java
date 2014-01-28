@@ -103,8 +103,62 @@ public class Demo {
             ex.printStackTrace();
         }
     }
+    
+    public static void urlDemo() {
+        String urlpattern = "http://adx.adsame.com/?p=%s";
+        
+        String pageUrl = "http://site.com?a=1&b=2";
+        String asid = "asid1234abc";
+        String siteId = "sohu.com";
+        String ip = "211.32.15.23";
+        String ua = "Mozilla/5.0 (X11; Linux i686)";
+        String t = String.valueOf(System.currentTimeMillis());
+        
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("pageurl", URLEncoder.encode(pageUrl));
+        params.put("asid", URLEncoder.encode(asid));
+        params.put("siteid", URLEncoder.encode(siteId));
+        params.put("ip", URLEncoder.encode(ip));
+        params.put("ua", URLEncoder.encode(ua));
+        params.put("t", URLEncoder.encode(t));
+        
+        StringBuilder builder = new StringBuilder();
+        for (String key : params.keySet()) {
+            String value = params.get(key);
+            builder.append(key);
+            builder.append("=");
+            builder.append(value);
+            builder.append("&");
+        }
+        builder.deleteCharAt(builder.length() - 1);
+        String url = String.format(urlpattern, 
+                Base64.encodeBase64URLSafeString(builder.toString().getBytes()));
+        
+        
+ 
+        System.out.println(url + "  " + url.length());
+        decodeUrl(url);
+    }
+    
+    public static Map<String, String> decodeUrl(String url) {
 
-    public static Map<String, String> analysisQuery(String query) {
+        try {
+            URL inUrl = new URL(url);
+            String query = inUrl.getQuery();
+            //System.out.println(query);
+            Map<String, String> outParamsMap = analysisQuery(query);
+            String outParams = new String(Base64.decodeBase64(outParamsMap.get("p")));
+
+            Map<String, String> paramsMap = analysisQuery(outParams);
+            return paramsMap;
+
+        } catch (MalformedURLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    private static Map<String, String> analysisQuery(String query) {
         String[] queryStringSplit = query.split("&");
         Map<String, String> queryStringMap
                 = new HashMap<String, String>(queryStringSplit.length);
@@ -246,10 +300,11 @@ public class Demo {
     public static void main(String[] args) {
         //aesDemo();
         //urlBase64Demo();
+        urlDemo();
         //cookieDemo();
         //benchmarkCookie();
         //cookieCustomDemo();
-        benchmarkCustomCookie();
+        //benchmarkCustomCookie();
         //test();
         
 

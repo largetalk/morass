@@ -20,8 +20,7 @@ public class EnigmaEncrypter {
     private static Reflector REFLECTOR;
     private static Plugboard PLUGBOARD;
     private static Enigma enigma;
-    
-    
+
     static {
         ROTORS = new Rotor[]{
             new Rotor("JqBDko4fZyzt1Yr6GRMFxOUIalXPnELNcs823hAvKH905gdmp7CTVbuQeiWSwj"),
