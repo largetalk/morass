@@ -84,6 +84,7 @@ public class Decrypter {
                 String originalString = new String(original, "utf-8");
                 return originalString;
             } catch (Exception e) {
+                e.printStackTrace();
                 return null;
             }
         } catch (Exception ex) {

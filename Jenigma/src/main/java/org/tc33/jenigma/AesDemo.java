@@ -56,7 +56,7 @@ public class AesDemo {
             e.printStackTrace();
         } catch (NoSuchPaddingException e) {
             e.printStackTrace();
-        } catch (InvalidKeyException e) {
+        }catch (InvalidKeyException e) {
             e.printStackTrace();
         } catch (IllegalBlockSizeException e) {
             e.printStackTrace();

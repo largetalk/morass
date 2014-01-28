@@ -31,7 +31,26 @@ public final class Alphabet {
     }
 
     public static char revertPos(int pos) {
-        return ALPHABET.inverse().get(pos);
+        return ALPHABET.inverse().get(pos % length());
+    }
+    
+    public static char[] getStartPostion(int hashCode) {
+        char[] starts = new char[2];
+        starts[0] = revertPos((int) (hashCode >>> 24) ^ ((hashCode >> 16) & 0xff));
+
+        starts[1] = revertPos((int) ((hashCode >> 8) & 0xff) ^ (hashCode & 0xff));
+
+     
+        return starts;
+    }
+    public static char[] getHashChars(int hashCode) {
+        char[] starts = new char[2];
+        starts[0] = revertPos((int) (hashCode >>> 24) ^ ((hashCode >> 16) & 0xff));
+
+        starts[1] = revertPos((int) ((hashCode >> 8) & 0xff) ^ (hashCode & 0xff));
+
+     
+        return starts;
     }
 
     public static String getRotorMap() {

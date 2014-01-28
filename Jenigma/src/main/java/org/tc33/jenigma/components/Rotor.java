@@ -20,6 +20,8 @@
 
 package org.tc33.jenigma.components;
 
+import com.google.common.collect.HashBiMap;
+
 
 
 /**
@@ -28,6 +30,8 @@ package org.tc33.jenigma.components;
 public class Rotor extends Permutator {
 
 	private String permutation;
+        private int table_length;
+        private HashBiMap<Character, Integer> table =  HashBiMap.create();
 	
 	private int  position = 0;
 
@@ -36,6 +40,8 @@ public class Rotor extends Permutator {
      */
     public Rotor(String permutation) {
         this.permutation = permutation;
+        this.table_length = permutation.length();
+        for (int i=0; i<table_length; i++) table.put(permutation.charAt(i), i);
 
     }
     public static Rotor create() {
@@ -52,7 +58,7 @@ public class Rotor extends Permutator {
      */
     public char execute(char input) {
         int pos = Alphabet.getPos(input) + position;
-        pos = pos % Alphabet.length();
+        pos = pos % table_length;
         return permutation.charAt(pos);
     }
 
@@ -60,9 +66,9 @@ public class Rotor extends Permutator {
      * Get the plain char from the recieved cipher char.
      */
     public char revert(char output) {
-        int pos = permutation.indexOf(output);
+        int pos = table.get(output);
         pos = pos - position;
-        if (pos<0) pos += Alphabet.length();
+        if (pos<0) pos += table_length;
         return Alphabet.revertPos(pos);
     }
 

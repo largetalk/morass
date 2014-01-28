@@ -1,19 +1,19 @@
 /*
  *  Copyright 2003-2008 Tom Castle (tc33.org)
  *  Licensed under GNU General Public License
- *  
+ *
  *  This file is part of JEnigma.
- * 
+ *
  *  JEnigma is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- *  
+ *
  *  JEnigma is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- *  
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with JEnigma.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -161,11 +161,11 @@ public class Enigma {
     }
 
     public static void main(String[] args) {
-        System.out.println(Alphabet.getRotorMap());
-        System.out.println(Alphabet.table());
-        System.out.println(Alphabet.getReflectorMap());
-        System.out.println("========");
+        //test();
+        benchmark();
+    }
 
+    public static void test() {
         Rotor rotor1 = new Rotor(Alphabet.getRotorMap());
         rotor1.setPosition(5);
         System.out.println(rotor1);
@@ -183,6 +183,7 @@ public class Enigma {
         System.out.println("\n========");
 
         Reflector reflector1 = new Reflector(Alphabet.getReflectorMap());
+        System.out.println(reflector1);
         char[] reflectorIns = new char[]{ 'B', 'C', 'i', 'b', 'y', '0', '8', '9', 'B', 'C'};
         System.out.println(String.valueOf(reflectorIns));
         StringBuilder reflectorOuts = new StringBuilder();
@@ -217,5 +218,40 @@ public class Enigma {
         String replaintext = enigma1.execute(ciphertext);
         System.out.println(replaintext);
 
+    }
+    public static void benchmark()  {
+        Rotor[] rotors = new Rotor[]{
+            Rotor.create(), Rotor.create(), Rotor.create(), Rotor.create(),
+//            Rotor.create(), Rotor.create(), Rotor.create(), Rotor.create(),
+//            Rotor.create(), Rotor.create(), Rotor.create(), Rotor.create(),
+//            Rotor.create(), Rotor.create(), Rotor.create(), Rotor.create()
+        };
+//        char[] startPositions = new char[]{
+//            'A', 'B', 'C', 'D',
+//            'E', 'F', 'G', 'h',
+//            'a', 'b', 'c', 'g',
+//            'e', 'f', 'g', 'i'
+//        };
+        Reflector reflector = Reflector.create();
+        Plugboard plugboard = new Plugboard();
+        plugboard.addCable('A', 'T').addCable('U', 'v');
+
+        
+        String plaintext = "VERYBIGQUESTIONthisisbeautifule9527";
+        char[] startPositions = Alphabet.getStartPostion(plaintext.hashCode());
+        //System.out.println(startPositions);
+        Enigma enigma = new Enigma(rotors, startPositions, plugboard, reflector);
+
+        long startTime = System.currentTimeMillis();
+        for (int i = 0; i < 100; i++) {
+            enigma.setRotorPositions(startPositions);
+            String ciphertext = enigma.execute(plaintext);
+
+            enigma.setRotorPositions(startPositions);
+            String tmp = enigma.execute(ciphertext);
+            //System.out.println(tmp);
+        }
+        long endTime = System.currentTimeMillis();
+        System.out.println("run 100000 times used " + (endTime - startTime));
     }
 }
