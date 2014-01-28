@@ -1,21 +1,24 @@
 package org.tc33.jenigma.components;
 
-import java.util.*;
-import com.google.common.collect.HashBiMap;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
 
 
 public final class Alphabet {
-    private static String KEYS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    private static HashBiMap<Character, Integer> ALPHABET =  HashBiMap.create();
+    private final static String KEYS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    private final static HashMap<Character, Integer> ALPHABET =  new HashMap<Character, Integer>();
+    public final static int LENGTH;
 
     static {
+        LENGTH = KEYS.length();
         for (int i=0; i<KEYS.length(); i++) ALPHABET.put(KEYS.charAt(i), i);
     }
 
     private Alphabet() { }
 
     public static int length() {
-        return ALPHABET.size();
+        return LENGTH;
     }
 
     public static String table() {
@@ -31,26 +34,22 @@ public final class Alphabet {
     }
 
     public static char revertPos(int pos) {
-        return ALPHABET.inverse().get(pos % length());
+        return KEYS.charAt(pos % LENGTH);
     }
     
     public static char[] getStartPostion(int hashCode) {
         char[] starts = new char[2];
-        starts[0] = revertPos((int) (hashCode >>> 24) ^ ((hashCode >> 16) & 0xff));
-
-        starts[1] = revertPos((int) ((hashCode >> 8) & 0xff) ^ (hashCode & 0xff));
-
-     
+        starts[0] = revertPos((int) (hashCode >>> 24));
+        starts[1] = revertPos((int) ((hashCode >> 16) & 0xff));
+        starts[2] = revertPos((int) ((hashCode >> 8) & 0xff));
+        starts[3] = revertPos((int) (hashCode & 0xff));
         return starts;
     }
     public static char[] getHashChars(int hashCode) {
-        char[] starts = new char[2];
-        starts[0] = revertPos((int) (hashCode >>> 24) ^ ((hashCode >> 16) & 0xff));
-
-        starts[1] = revertPos((int) ((hashCode >> 8) & 0xff) ^ (hashCode & 0xff));
-
-     
-        return starts;
+        char[] hc = new char[2];
+        hc[0] = revertPos((int) (hashCode >>> 24) ^ ((hashCode >> 16) & 0xff));
+        hc[1] = revertPos((int) ((hashCode >> 8) & 0xff) ^ (hashCode & 0xff));
+        return hc;
     }
 
     public static String getRotorMap() {

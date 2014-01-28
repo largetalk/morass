@@ -17,20 +17,12 @@
  *  You should have received a copy of the GNU General Public License
  *  along with JEnigma.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.tc33.jenigma.components;
 
-/**
- * Reflector component of Enigma machine.
- */
 public class Reflector extends Permutator {
 
+    private final String reflectorKey;
 
-    String reflectorKey;
-    
-    /**
-     * Constructor.
-     */
     public Reflector(String permutation) {
         this.reflectorKey = permutation;
     }
@@ -44,13 +36,9 @@ public class Reflector extends Permutator {
         return reflectorKey;
     }
 
-    /**
-     * Get the cipher char from the received plain char.
-     */
     public char getCipherChar(char plainChar) {
         int pos = Alphabet.getPos(plainChar);
-        char cipherChar = reflectorKey.charAt(pos);
-        return cipherChar;
+        return reflectorKey.charAt(pos);
     }
 
 }

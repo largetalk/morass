@@ -17,33 +17,24 @@
  *  You should have received a copy of the GNU General Public License
  *  along with JEnigma.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.tc33.jenigma.components;
 
-import com.google.common.collect.HashBiMap;
 
+import java.util.HashMap;
 
-
-/**
- * Scrambler component of Enigma machine.
- */
 public class Rotor extends Permutator {
 
 	private String permutation;
-        private int table_length;
-        private HashBiMap<Character, Integer> table =  HashBiMap.create();
+        private HashMap<Character, Integer> map =  new HashMap<Character, Integer>();
 	
 	private int  position = 0;
 
-    /**
-     * Constructor for rotor, taking parameters to show how to encrypt when set at position 'A'.
-     */
     public Rotor(String permutation) {
+        if (permutation.length() != Alphabet.LENGTH) return;
         this.permutation = permutation;
-        this.table_length = permutation.length();
-        for (int i=0; i<table_length; i++) table.put(permutation.charAt(i), i);
-
+        for (int i=0; i<Alphabet.LENGTH; i++) map.put(permutation.charAt(i), i);
     }
+    
     public static Rotor create() {
         return new Rotor(Alphabet.getRotorMap());
     }
@@ -53,59 +44,29 @@ public class Rotor extends Permutator {
         return permutation +  " " + String.valueOf(position);
     }
 
-    /**
-     * Get the cipher char from the recieved plain char.
-     */
     public char execute(char input) {
         int pos = Alphabet.getPos(input) + position;
-        pos = pos % table_length;
+        pos = pos % Alphabet.LENGTH;
         return permutation.charAt(pos);
     }
 
-    /**
-     * Get the plain char from the recieved cipher char.
-     */
     public char revert(char output) {
-        int pos = table.get(output);
-        pos = pos - position;
-        if (pos<0) pos += table_length;
+        int pos = map.get(output);
+        pos = pos  - position;
+        if (pos<0) pos += Alphabet.LENGTH;
         return Alphabet.revertPos(pos);
     }
 
-    /**
-     * Set this rotor to a new position.
-     * @param position
-     */
     public void setPosition(int position) {
-    	// How many positions do we need to rotate?
-    	this.position = Math.abs(position) % Alphabet.length();
+    	this.position = Math.abs(position) % Alphabet.LENGTH;
 
     }
     public void setPosition(char ch) {
         setPosition(Alphabet.getPos(ch));
     }
     
-    /**
-     * Rotate the rotor one position.
-     */
     public void rotate() {
-    	// Increment position by one, bending round to the 'A' at 'Z' NIFQFHKBUGQRAFRU
-        position++;
-        if (position > Alphabet.length()) position=0;
-
-
+        position = (position + 1) % Alphabet.LENGTH;
     }
-    
 
-    
-
-    
-    /**
-     * Prints the whole key for this rotor - for testing purposes.
-     */
-    public void printKey() {
-        System.out.println("PT................CT - CT................PT");
-        System.out.println(permutation);
-
-    }
 }

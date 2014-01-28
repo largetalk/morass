@@ -17,67 +17,33 @@
  *  You should have received a copy of the GNU General Public License
  *  along with JEnigma.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package org.tc33.jenigma.components;
 
 import java.util.*;
 
-/**
- * Plugboard component of Engima machine.
- */
 public class Plugboard extends Permutator {
 
-	private char[] cables = new char[Alphabet.length()];
-    
-    /**
-     * Constructor. This is commented out as it's safer to force users to use 
-     * the addCable method.
-     */
-    /*public Plugboard(char[] cables) {
-        this.cables = cables;
-    }*/
-    
-    /**
-     * Create an empty plugboard to add cables to later.
-     */
+    private char[] cables = new char[Alphabet.length()];
+
     public Plugboard() {}
-    
-    /**
-     * Add a cable to the plugboard.
-     * @param cableEnd1
-     * @param cableEnd2
-     */
-	public Plugboard addCable(char cableEnd1, char cableEnd2) {
 
-		cables[Alphabet.getPos(cableEnd1)] = cableEnd2;
-		cables[Alphabet.getPos(cableEnd2)] = cableEnd1;
+    public Plugboard addCable(char cableEnd1, char cableEnd2) {
+        cables[Alphabet.getPos(cableEnd1)] = cableEnd2;
+        cables[Alphabet.getPos(cableEnd2)] = cableEnd1;
         return this;
-	}
-	
-	public char getSwappedChar(char cableEnd) {
-
-		char otherEnd = cables[Alphabet.getPos(cableEnd)];
-		if (otherEnd == '\u0000')
-			otherEnd = cableEnd;
-		
-		return otherEnd;
-	}
-	
-	public void clearCables() {
-		Arrays.fill(cables, '\u0000');
-	}
-    
-	/*public void setCables(char[] cables) {
-		this.cables = cables;
-	}*/
-	
-    /**
-     * Prints the whole key for the plugboard - for testing purposes.
-     */
-    public void printKey() {
-        System.out.println("PT................CT");
-        for (int i=0; i < cables.length; i++){
-            System.out.print(getSwappedChar(Alphabet.revertPos(i)));
-        }
     }
+
+    public char getSwappedChar(char cableEnd) {
+        char otherEnd = cables[Alphabet.getPos(cableEnd)];
+        if (otherEnd == '\u0000') {
+            return cableEnd;
+        }
+
+        return otherEnd;
+    }
+
+    public void clearCables() {
+        Arrays.fill(cables, '\u0000');
+    }
+
 }
