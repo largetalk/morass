@@ -3,3 +3,4 @@ thrift/.idea/
 Jenigma/target/
 Jenigma/.idea/
 *.log
+/allasync/target/
