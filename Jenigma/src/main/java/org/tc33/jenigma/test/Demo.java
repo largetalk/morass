@@ -114,6 +114,9 @@ public class Demo {
         String ua = "Mozilla/5.0 (X11; Linux i686)";
         String t = String.valueOf(System.currentTimeMillis());
         
+        System.out.printf("原始参数: pageurl=%s, asid=%s, siteid=%s, ip=%s, ua=%s, t=%s\n", 
+                pageUrl, asid, siteId, ip, ua, t);
+        
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("pageurl", URLEncoder.encode(pageUrl));
         params.put("asid", URLEncoder.encode(asid));
@@ -136,7 +139,7 @@ public class Demo {
         
         
  
-        System.out.println(url + "  " + url.length());
+        System.out.printf("编码之后: %s, url长度: %s\n", url, url.length());
         decodeUrl(url);
     }
     
@@ -150,6 +153,7 @@ public class Demo {
             String outParams = new String(Base64.decodeBase64(outParamsMap.get("p")));
 
             Map<String, String> paramsMap = analysisQuery(outParams);
+            System.out.printf("解码之后: %s\n", paramsMap.toString());
             return paramsMap;
 
         } catch (MalformedURLException ex) {

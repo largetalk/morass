@@ -57,11 +57,15 @@ public class Encrypter {
     }
     
     public static void main(String[] args) {
-        float price = 500;
+        double price = 500.0;
+        long curTime = System.currentTimeMillis();
+        String winPrice = String.format("%s_%s", price, curTime);
         String token = "35414f436f57767956694e4436684d69";
-        String encrypted = encrypt(String.valueOf(price), token);
-        System.out.println(encrypted);
-        System.out.println(decrypt(encrypted, token));
+        String encrypted = encrypt(winPrice, token);
+        System.out.printf("明文: %s\n", winPrice);
+        System.out.printf("密码: %s\n", token);
+        System.out.printf("密文: %s\n",encrypted);
+        System.out.printf("解码后明文: %s\n",decrypt(encrypted, token));
     }
 
 }
