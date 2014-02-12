@@ -3,13 +3,11 @@
  */
 package com.adsame.adx.encrypt.enigma.components;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 
 public final class Alphabet {
 
-    public final static String KEYS;
+/*    public final static String KEYS;
     public final static int LENGTH;
 
     private final static HashMap<Character, Integer> ALPHABET;
@@ -21,85 +19,103 @@ public final class Alphabet {
         for (int i = 0; i < KEYS.length(); i++) {
             ALPHABET.put(KEYS.charAt(i), i);
         }
+    }*/
+
+    private int[] table;
+    private int length;
+    private byte[] revTable;
+
+    public Alphabet(byte[] charSet) {
+        if (charSet != null) {
+            throw new IllegalArgumentException("init Alphabet failed");
+        }
+        table = new int[256];
+        for(int i = 0; i < table.length; i++) {
+            table[i] = -1;
+        }
+
+        int seq = 0;
+        for(byte b: charSet) {
+            int index = b & 0xff; //byte to int
+            if (table[index] == -1) { // in case of duplicate byte in charSet
+                table[index] = seq++;
+            }
+        }
+        this.length = seq;
+
+        seq = 0;
+        revTable = new byte[this.length];
+        for (int i = 0; i < table.length; i++) {
+            if (table[i] != -1) {
+                revTable[seq++] = (byte) (i & 0xff); // int to byte
+            }
+        }
     }
 
-    private Alphabet() {
+    public int size() {
+        return length;
     }
 
-    public static String table() {
-        return KEYS;
+    public boolean isValid(byte c) {
+        return table[c & 0xff] != -1;
     }
 
-    public static boolean isValid(char c) {
-        return ALPHABET.containsKey(c);
+    public int getPos(byte c) {
+        return table[c & 0xff];
     }
 
-    public static int getPos(char c) {
-        return ALPHABET.get(c);
+    public byte revertPos(int pos) {
+        return revTable[pos % length];
     }
 
-    public static char revertPos(int pos) {
-        return KEYS.charAt(pos % LENGTH);
-    }
-
-    public static char[] getStartPostion(int hashCode) {
-        char[] starts = new char[2];
-        starts[0] = revertPos((int) (hashCode >>> 24));
-        starts[1] = revertPos((int) ((hashCode >> 16) & 0xff));
-        starts[2] = revertPos((int) ((hashCode >> 8) & 0xff));
-        starts[3] = revertPos((int) (hashCode & 0xff));
-        return starts;
-    }
-
-    public static char[] getHashChars(int hashCode) {
-        char[] hc = new char[2];
+    public byte[] getHashChars(int hashCode) {
+        byte[] hc = new byte[2];
         hc[0] = revertPos((int) (hashCode >>> 24) ^ ((hashCode >> 16) & 0xff));
         hc[1] = revertPos((int) ((hashCode >> 8) & 0xff) ^ (hashCode & 0xff));
         return hc;
     }
 
-    public static String getRotorMap() {
-        String[] keys = KEYS.split("");
-        shuffleArray(keys);
-        StringBuilder map = new StringBuilder(keys.length);
-        for (String str : keys) {
-            map.append(str);
-        }
-
-        return map.toString();
+    public byte[] getRotorMap() {
+        byte[] rotorMap = new byte[length];
+        System.arraycopy(revTable, 0, rotorMap, 0, length);
+        shuffleArray(rotorMap);
+        return rotorMap;
     }
 
-    public static String getReflectorMap() {
-        char[] characters = new char[KEYS.length()];
-        ArrayList<Character> charList = new ArrayList<Character>();
-        for (char ch : KEYS.toCharArray()) {
-            charList.add(ch);
+    public byte[] getReflectorMap() {
+        byte[] reflectorMap = new byte[length];
+        for (int i = 0; i < length; i++) {
+            reflectorMap[i] = -1;
+         }
+
+        ArrayList<Byte> byteList = new ArrayList<Byte>();
+        for (byte b : revTable) {
+            byteList.add(b);
         }
 
         Random rnd = new Random();
-        for (int i = 0; i < KEYS.length(); i++) {
-            if (characters[i] == '\u0000') {
+        for (int i = length - 1; i >= 0; i--) {
+            if (reflectorMap[i] == -1) {
+                int index = rnd.nextInt(byteList.size());
 
-                int index = rnd.nextInt(charList.size());
-                while (index == 0) {
-                    index = rnd.nextInt(charList.size());
+                Byte c = byteList.get(index);
+                reflectorMap[i] = c;
+                reflectorMap[getPos(c)] = revertPos(i);
+                byteList.remove(i);
+                if (index != i) {
+                    byteList.remove(index);
                 }
-                Character c = charList.get(index);
-                characters[i] = c;
-                characters[getPos(c)] = revertPos(i);
-                charList.remove(index);
-                charList.remove(0);
             }
         }
-        return String.valueOf(characters);
+        return reflectorMap;
     }
 
-    private static <T> void shuffleArray(T[] ar) {
+    private static void shuffleArray(byte[] ar) {
         Random rnd = new Random();
         for (int i = ar.length - 1; i > 0; i--) {
             int index = rnd.nextInt(i + 1);
             // Simple swap
-            T a = ar[index];
+            byte a = ar[index];
             ar[index] = ar[i];
             ar[i] = a;
         }
