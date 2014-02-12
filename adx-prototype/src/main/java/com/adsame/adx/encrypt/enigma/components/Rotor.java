@@ -6,11 +6,6 @@ package com.adsame.adx.encrypt.enigma.components;
 import java.util.HashMap;
 
 public class Rotor extends Permutator {
-    
-    //public static final String I = "JqBDko4fZyzt1Yr6GRMFxOUIalXPnELNcs823hAvKH905gdmp7CTVbuQeiWSwj";
-    //public static final String II = "LbzPDGJU3nf81OV5BHqCrQcAlpohFm7aSjdMRKEvXNg6s0T4ZWty2w9YiIeuxk";
-    //public static final String III = "bWhqJ1AeX8kzfMCRN0dUZL4wnYpSmgGExjvHyDFVKT35BQ6uP29rclI7staioO";
-    //public static final String IV = "fJwk3X0IAZVacziSbdj6xtCvgYD8lr7s5PL4eFuB2UTn1GpMhmRyqQHEON9WoK";
 
     private int position = 0;
     private HashMap<Byte, Integer> map;

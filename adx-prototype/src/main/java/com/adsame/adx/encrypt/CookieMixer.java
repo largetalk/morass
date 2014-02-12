@@ -4,36 +4,52 @@
 package com.adsame.adx.encrypt;
 
 import com.adsame.adx.encrypt.enigma.Enigma;
+import com.adsame.adx.encrypt.enigma.EnigmaBuilder;
 import com.adsame.adx.encrypt.enigma.components.Alphabet;
 import com.adsame.adx.encrypt.enigma.components.Reflector;
 import com.adsame.adx.encrypt.enigma.components.Rotor;
 
 public class CookieMixer {
+    private static Enigma enigma;
+
+    static {
+        EnigmaBuilder builder = new EnigmaBuilder(EnigmaBuilder.DEFAULT_ALPHABET);
+
+        enigma = builder.addRotor(EnigmaBuilder.ROTOR_I)
+                .addRotor(EnigmaBuilder.ROTOR_II)
+                .addRotor(EnigmaBuilder.ROTOR_III)
+                .addRotor(EnigmaBuilder.ROTOR_IV)
+                .addReflector(EnigmaBuilder.DEFAULT_RELECTOR)
+                .build();
+    }
 
     public static String mix(String cookieId, String dspid) {
-        char[] dspChar = Alphabet.getHashChars(dspid.hashCode());
-        char[] asidChar = Alphabet.getHashChars(cookieId.hashCode());
-        char[] head = new char[]{dspChar[0], dspChar[1], asidChar[0], asidChar[1]};
-        
-        Enigma enigma = new Enigma(createDefaultRotors(), Reflector.DEFAULT);
-        enigma.setRotorPositions(head);
-        String encrypted = enigma.execute(cookieId);
-        return new String(head) + encrypted;
+        //byte[] dspChar = Alphabet.getHashChars(dspid.hashCode());
+        //byte[] asidChar = Alphabet.getHashChars(cookieId.hashCode());
+        //byte[] head = new byte[][]{dspChar[0], dspChar[1], asidChar[0], asidChar[1]};
+
+        byte[] mima = "aaaa".getBytes();
+        enigma.setRotorPositions(mima);
+        byte[] encrypted = enigma.execute(cookieId.getBytes());
+        return new String(encrypted);
     }
 
     public static String demix(String encrypted) {
-        char[] starts = encrypted.substring(0, 4).toCharArray();
-        Enigma enigma = new Enigma(createDefaultRotors(), Reflector.DEFAULT);
-        enigma.setRotorPositions(starts);
-        return enigma.execute(encrypted.substring(4));
+        //char[] starts = encrypted.substring(0, 4).toCharArray();
+
+        byte[] mima = "aaaa".getBytes();
+        enigma.setRotorPositions(mima);
+        return new String(enigma.execute(encrypted.getBytes()));
     }
-    
-    private static Rotor[] createDefaultRotors() {
-        return new Rotor[]{
-            new Rotor(Rotor.I),
-            new Rotor(Rotor.II),
-            new Rotor(Rotor.III),
-            new Rotor(Rotor.IV)
-        };
+
+    public static void main(String[] args) {
+
+        String plain = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        String mixed = mix(plain, "a");
+        String demixed = demix(mixed);
+        System.out.println(plain);
+        System.out.println(mixed);
+        System.out.println(demixed);
     }
+
 }

@@ -7,26 +7,12 @@ import java.util.*;
 
 public final class Alphabet {
 
-/*    public final static String KEYS;
-    public final static int LENGTH;
-
-    private final static HashMap<Character, Integer> ALPHABET;
-
-    static {
-        KEYS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        LENGTH = KEYS.length();
-        ALPHABET = new HashMap<Character, Integer>();
-        for (int i = 0; i < KEYS.length(); i++) {
-            ALPHABET.put(KEYS.charAt(i), i);
-        }
-    }*/
-
     private int[] table;
     private int length;
     private byte[] revTable;
 
     public Alphabet(byte[] charSet) {
-        if (charSet != null) {
+        if (charSet == null) {
             throw new IllegalArgumentException("init Alphabet failed");
         }
         table = new int[256];
@@ -34,11 +20,15 @@ public final class Alphabet {
             table[i] = -1;
         }
 
-        int seq = 0;
         for(byte b: charSet) {
             int index = b & 0xff; //byte to int
-            if (table[index] == -1) { // in case of duplicate byte in charSet
-                table[index] = seq++;
+            table[index] = 0;
+        }
+
+        int seq = 0;
+        for (int i = 0; i < table.length; i++) {
+            if (table[i] != -1) {
+                table[i] = seq++;
             }
         }
         this.length = seq;
@@ -50,6 +40,11 @@ public final class Alphabet {
                 revTable[seq++] = (byte) (i & 0xff); // int to byte
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return new String(revTable);
     }
 
     public int size() {
@@ -94,16 +89,19 @@ public final class Alphabet {
         }
 
         Random rnd = new Random();
-        for (int i = length - 1; i >= 0; i--) {
+        for (int i = 0; i < length; i++) {
             if (reflectorMap[i] == -1) {
                 int index = rnd.nextInt(byteList.size());
+                while (byteList.size() > 1 && index == 0) {
+                    index = rnd.nextInt(byteList.size());
+                }
 
                 Byte c = byteList.get(index);
                 reflectorMap[i] = c;
                 reflectorMap[getPos(c)] = revertPos(i);
-                byteList.remove(i);
-                if (index != i) {
-                    byteList.remove(index);
+                byteList.remove(index);
+                if (index != 0) {
+                    byteList.remove(0);
                 }
             }
         }
