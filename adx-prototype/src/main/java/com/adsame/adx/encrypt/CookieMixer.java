@@ -5,6 +5,7 @@ package com.adsame.adx.encrypt;
 
 import com.adsame.adx.encrypt.enigma.Enigma;
 import com.adsame.adx.encrypt.enigma.EnigmaBuilder;
+import com.adsame.adx.encrypt.enigma.EnigmaStatus;
 import com.adsame.adx.encrypt.enigma.components.Alphabet;
 import com.adsame.adx.encrypt.enigma.components.Reflector;
 import com.adsame.adx.encrypt.enigma.components.Rotor;
@@ -28,18 +29,22 @@ public class CookieMixer {
         //byte[] asidChar = Alphabet.getHashChars(cookieId.hashCode());
         //byte[] head = new byte[][]{dspChar[0], dspChar[1], asidChar[0], asidChar[1]};
 
+
+        EnigmaStatus enigmaStatus = enigma.buildEnigmaStatus();
         byte[] mima = "aaaa".getBytes();
-        enigma.setRotorPositions(mima);
-        byte[] encrypted = enigma.execute(cookieId.getBytes());
+        enigma.setRotorPositions(mima, enigmaStatus);
+        byte[] encrypted = enigma.execute(cookieId.getBytes(), enigmaStatus);
         return new String(encrypted);
     }
 
     public static String demix(String encrypted) {
         //char[] starts = encrypted.substring(0, 4).toCharArray();
 
+        EnigmaStatus enigmaStatus = enigma.buildEnigmaStatus();
+
         byte[] mima = "aaaa".getBytes();
-        enigma.setRotorPositions(mima);
-        return new String(enigma.execute(encrypted.getBytes()));
+        enigma.setRotorPositions(mima, enigmaStatus);
+        return new String(enigma.execute(encrypted.getBytes(), enigmaStatus));
     }
 
     public static void main(String[] args) {

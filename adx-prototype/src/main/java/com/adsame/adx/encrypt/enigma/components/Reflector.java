@@ -14,8 +14,4 @@ public class Reflector extends Permutator {
     public String toString() {
         return new String(permutation);
     }
-
-    public Alphabet getAlphabet() {
-        return this.alphabet;
-    }
 }

@@ -7,7 +7,6 @@ import java.util.HashMap;
 
 public class Rotor extends Permutator {
 
-    private int position = 0;
     private HashMap<Byte, Integer> map;
     private byte[] revPermutation; // for replace map
 
@@ -28,34 +27,21 @@ public class Rotor extends Permutator {
     
     @Override
     public String toString() {
-        return permutation.toString() + " " + String.valueOf(position);
+        return permutation.toString();
     }
 
-    public byte execute(byte input) {
+    public byte execute(byte input, int position) {
         int pos = alphabet.getPos(input) + position;
         pos = pos % permutation.length;
         return permutation[pos];
     }
 
-    public byte revert(byte output) {
+    public byte revert(byte output, int position) {
         int pos = map.get(output);
         pos = pos - position;
         if (pos < 0) {
             pos += permutation.length;
         }
         return alphabet.revertPos(pos);
-    }
-
-    public void setPosition(int position) {
-        this.position = Math.abs(position) % permutation.length;
-
-    }
-
-    public void setPosition(byte ch) {
-        setPosition(alphabet.getPos(ch));
-    }
-
-    public void rotate() {
-        position = (position + 1) % permutation.length;
     }
 }

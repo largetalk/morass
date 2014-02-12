@@ -27,7 +27,7 @@ public class EnigmaBuilder {
     }
 
     public Enigma build() {
-        return new Enigma(rotors.toArray(new Rotor[rotors.size()]), reflector);
+        return new Enigma(alphabet, rotors.toArray(new Rotor[rotors.size()]), reflector);
     }
 
     public String randomRelector() {

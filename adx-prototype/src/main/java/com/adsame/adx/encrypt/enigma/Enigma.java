@@ -9,67 +9,50 @@ import com.adsame.adx.encrypt.enigma.components.Rotor;
 
 public class Enigma {
 
+    private Alphabet alphabet;
     private final Rotor[] rotors;
-    private final int[] turns;
     private final Reflector reflector;
 
-    public Enigma(Rotor[] rotors, Reflector reflector) {
+    public Enigma(Alphabet alphabet, Rotor[] rotors, Reflector reflector) {
+        this.alphabet = alphabet;
         this.rotors = rotors;
         this.reflector = reflector;
-
-        turns = new int[rotors.length];
-        for (int i = 0; i < rotors.length; i++) {
-            turns[i] = (int) Math.pow(reflector.getAlphabet().size(), i);
-        }
     }
 
-    public byte[] execute(byte[] input) {
+    public byte[] execute(byte[] input, EnigmaStatus enigmaStatus) {
         byte inputChar, outputChar;
         byte[] output = new byte[input.length];
 
         int n = 0;
         for (int i = 0; i < input.length; i++) {
             inputChar = input[i];
-            if (reflector.getAlphabet().isValid(inputChar)) {
+            if (alphabet.isValid(inputChar)) {
                 outputChar = inputChar;
 
-                for (Rotor rotor : rotors) {
-                    outputChar = rotor.execute(outputChar);
+                for (int j = 0; j < rotors.length; j++) {
+                    outputChar = rotors[j].execute(outputChar, enigmaStatus.rotorStatus(j));
                 }
 
                 outputChar = reflector.getCipherByte(outputChar);
 
                 // Put char back through the rotors.
                 for (int j = rotors.length - 1; j >= 0; j--) {
-                    outputChar = rotors[j].revert(outputChar);
+                    outputChar = rotors[j].revert(outputChar, enigmaStatus.rotorStatus(j));
                 }
 
                 output[n++] = outputChar;
 
-                // Rotate the rotors one position.
-                rotateRotors(n);
+                enigmaStatus.rotate();
             }
         }
         return output;
     }
 
-    public void rotateRotors(int charPos) {
-        for (int i = 0; i < rotors.length; i++) {
-            int rotorPos = charPos % turns[i];
-
-            if (rotorPos == 0) {
-                rotors[i].rotate();
-            }
-        }
+    public final void setRotorPositions(byte[] positions, EnigmaStatus enigmaStatus) {
+        enigmaStatus.setRotorPositions(positions);
     }
 
-    public final void setRotorPositions(byte[] positions) {
-        if (rotors.length != positions.length) {
-            throw new IllegalArgumentException("positions size is not equal rotors size");
-        }
-        
-        for (int i = 0; i < positions.length; i++) {
-            rotors[i].setPosition(positions[i]);
-        }
+    public EnigmaStatus buildEnigmaStatus() {
+        return new EnigmaStatus(alphabet, rotors.length);
     }
 }
