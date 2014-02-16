@@ -3,7 +3,6 @@ package me.largetalk.http.core;
 import org.apache.http.*;
 import org.apache.http.impl.DefaultBHttpClientConnection;
 import org.apache.http.impl.DefaultConnectionReuseStrategy;
-import org.apache.http.impl.DefaultHttpServerConnection;
 import org.apache.http.message.BasicHttpRequest;
 import org.apache.http.protocol.*;
 import org.apache.http.util.EntityUtils;

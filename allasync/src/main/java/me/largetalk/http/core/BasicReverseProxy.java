@@ -5,7 +5,6 @@ import org.apache.http.*;
 import org.apache.http.impl.DefaultBHttpClientConnection;
 import org.apache.http.impl.DefaultBHttpServerConnection;
 import org.apache.http.impl.DefaultConnectionReuseStrategy;
-import org.apache.http.impl.DefaultHttpServerConnection;
 import org.apache.http.protocol.*;
 
 import java.io.IOException;
