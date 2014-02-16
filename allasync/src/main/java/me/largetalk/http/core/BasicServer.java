@@ -26,9 +26,6 @@ import java.security.KeyManagementException;
 import java.util.Locale;
 import java.security.KeyStore;
 
-/**
- * Created by largetalk on 2/15/14.
- */
 public class BasicServer {
     public static void main(String  args[]) throws Exception {
         if (args.length < 1) {
