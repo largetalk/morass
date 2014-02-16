@@ -64,12 +64,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AsyncClient.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AsyncClient.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/me/largetalk/http/core/AsyncClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="43" selection-start="2548" selection-end="2548" vertical-scroll-proportion="-0.80451125" vertical-offset="1176" max-vertical-offset="1575">
+            <state line="60" column="43" selection-start="2548" selection-end="2548" vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="1575">
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AsyncServer.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/me/largetalk/http/core/AsyncServer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="56" column="69" selection-start="2349" selection-end="2349" vertical-scroll-proportion="1.3815789" vertical-offset="0" max-vertical-offset="2460">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BasicServer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/me/largetalk/http/core/BasicServer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="28" column="13" selection-start="900" selection-end="900" vertical-scroll-proportion="0.0" vertical-offset="1196" max-vertical-offset="2295">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="class#HttpFileHander#0;class#BasicServer#0" expanded="false" />
+                <element signature="method#HttpFileHander#0;class#HttpFileHander#0;class#BasicServer#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -91,6 +115,7 @@
         <option value="$PROJECT_DIR$/src/main/java/me/largetalk/http/core/BasicReverseProxy.java" />
         <option value="$PROJECT_DIR$/src/main/java/me/largetalk/http/core/BasicGet.java" />
         <option value="$PROJECT_DIR$/src/main/java/me/largetalk/http/core/AsyncClient.java" />
+        <option value="$PROJECT_DIR$/src/main/java/me/largetalk/http/core/AsyncServer.java" />
       </list>
     </option>
   </component>
@@ -231,23 +256,7 @@
     <property name="FullScreen" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
   </component>
-  <component name="RunManager" selected="Application.AsyncClient">
-    <configuration default="false" name="BasicGet" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="me.largetalk.http.core.BasicGet" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="allasync" />
-      <envs />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Application.AsyncServer">
     <configuration default="false" name="BasicPost" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="me.largetalk.http.core.BasicPost" />
       <option name="VM_PARAMETERS" />
@@ -303,6 +312,22 @@
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="allasync" />
+      <envs />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="AsyncServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="me.largetalk.http.core.AsyncServer" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/../../" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
@@ -440,19 +465,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Application.BasicGet" />
-      <item index="1" class="java.lang.String" itemvalue="Application.BasicPost" />
-      <item index="2" class="java.lang.String" itemvalue="Application.BasicServer" />
-      <item index="3" class="java.lang.String" itemvalue="Application.BasicReverseProxy" />
-      <item index="4" class="java.lang.String" itemvalue="Application.AsyncClient" />
+      <item index="0" class="java.lang.String" itemvalue="Application.BasicPost" />
+      <item index="1" class="java.lang.String" itemvalue="Application.BasicServer" />
+      <item index="2" class="java.lang.String" itemvalue="Application.BasicReverseProxy" />
+      <item index="3" class="java.lang.String" itemvalue="Application.AsyncClient" />
+      <item index="4" class="java.lang.String" itemvalue="Application.AsyncServer" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.AsyncClient" />
-        <item index="1" class="java.lang.String" itemvalue="Application.BasicReverseProxy" />
-        <item index="2" class="java.lang.String" itemvalue="Application.BasicServer" />
-        <item index="3" class="java.lang.String" itemvalue="Application.BasicPost" />
-        <item index="4" class="java.lang.String" itemvalue="Application.BasicGet" />
+        <item index="0" class="java.lang.String" itemvalue="Application.AsyncServer" />
+        <item index="1" class="java.lang.String" itemvalue="Application.AsyncClient" />
+        <item index="2" class="java.lang.String" itemvalue="Application.BasicReverseProxy" />
+        <item index="3" class="java.lang.String" itemvalue="Application.BasicServer" />
+        <item index="4" class="java.lang.String" itemvalue="Application.BasicPost" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -490,7 +515,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32861635" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32861635" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -561,6 +586,8 @@
         <state line="125" column="7" selection-start="4991" selection-end="4991" vertical-scroll-proportion="0.0" vertical-offset="2385" max-vertical-offset="3120">
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="class#HttpFileHander#0;class#BasicServer#0" expanded="false" />
+            <element signature="method#HttpFileHander#0;class#HttpFileHander#0;class#BasicServer#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -615,25 +642,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/largetalk/http/core/BasicServer.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/largetalk/http/core/BasicReverseProxy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="13" selection-start="900" selection-end="900" vertical-scroll-proportion="0.33223686" vertical-offset="218" max-vertical-offset="3075">
+        <state line="14" column="13" selection-start="464" selection-end="464" vertical-scroll-proportion="-1.1480263" vertical-offset="908" max-vertical-offset="3300">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/largetalk/http/core/BasicReverseProxy.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/largetalk/http/core/BasicServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="59" selection-start="292" selection-end="292" vertical-scroll-proportion="0.14802632" vertical-offset="0" max-vertical-offset="3300">
-          <folding />
+        <state line="28" column="13" selection-start="900" selection-end="900" vertical-scroll-proportion="0.0" vertical-offset="1897" max-vertical-offset="3075">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="class#HttpFileHander#0;class#BasicServer#0" expanded="false" />
+            <element signature="method#HttpFileHander#0;class#HttpFileHander#0;class#BasicServer#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/me/largetalk/http/core/AsyncClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="43" selection-start="2548" selection-end="2548" vertical-scroll-proportion="-0.80451125" vertical-offset="1176" max-vertical-offset="1575">
+        <state line="60" column="43" selection-start="2548" selection-end="2548" vertical-scroll-proportion="0.0" vertical-offset="967" max-vertical-offset="1575">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/largetalk/http/core/AsyncServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="69" selection-start="2349" selection-end="2349" vertical-scroll-proportion="1.3815789" vertical-offset="0" max-vertical-offset="2460">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
