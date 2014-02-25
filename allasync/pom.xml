@@ -32,5 +32,10 @@
           <artifactId>httpcore</artifactId>
           <version>4.3.1</version>
       </dependency>
+      <dependency>
+    <groupId>org.jdeferred</groupId>
+    <artifactId>jdeferred-core</artifactId>
+    <version>1.2.0</version>
+</dependency>
   </dependencies>
 </project>
