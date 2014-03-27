@@ -37,13 +37,13 @@ public class BasicPost {
 
         try {
         HttpEntity[] requestBodies = {
-                new StringEntity("This is the first test request",
+                new StringEntity("This is the first Test request",
                         ContentType.create("text/plain", Consts.UTF_8)),
-                new ByteArrayEntity("this is the second test request".getBytes("UTF-8"),
+                new ByteArrayEntity("this is the second Test request".getBytes("UTF-8"),
                         ContentType.APPLICATION_OCTET_STREAM),
                 new InputStreamEntity(
                         new ByteArrayInputStream(
-                                "this is the third test request (will be chunked)".getBytes("UTF-8")),
+                                "this is the third Test request (will be chunked)".getBytes("UTF-8")),
                                 ContentType.APPLICATION_OCTET_STREAM)
         };
             for (int i = 0; i < requestBodies.length; i++) {

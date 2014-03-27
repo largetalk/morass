@@ -2,6 +2,8 @@ thrift/target/
 thrift/.idea/
 Jenigma/target/
 Jenigma/.idea/
+allasync/.idea/
+adx-prototype/.idea/
 *.log
 /allasync/target/
 /adx-prototype/target/
