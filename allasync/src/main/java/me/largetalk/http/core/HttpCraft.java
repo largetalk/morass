@@ -1,7 +1,4 @@
-/*
- * Copyright (c) AdSame Corporation. All rights reserved.
- */
-package com.adsame.rtb.adx.auctioneer.util;
+package me.largetalk.http.core;
 
 import org.apache.http.Header;
 import org.apache.http.HttpRequest;

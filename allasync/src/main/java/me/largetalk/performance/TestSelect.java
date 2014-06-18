@@ -87,6 +87,7 @@ public class TestSelect {
                         while (byteBuffer.hasRemaining()) {
                             socketChannel.write(byteBuffer);
                         }
+                        //key.cancel();
                         key.interestOps(SelectionKey.OP_READ);
                         System.out.println("a channel is ready for writing");
                         // a channel is ready for writing
