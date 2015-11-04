@@ -16,16 +16,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpcore-nio</artifactId>
             <version>4.3.1</version>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.11</artifactId>
+            <version>1.5.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -47,6 +46,40 @@
             <groupId>com.clearspring.analytics</groupId>
             <artifactId>stream</artifactId>
             <version>2.6.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.adsame.network</groupId>
+            <artifactId>netty-wrapper</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpasyncclient</artifactId>
+            <version>4.1</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <artifactId>scala-library</artifactId>
+            <groupId>org.scala-lang</groupId>
+            <version>2.11.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.adsame.algorithm</groupId>
+            <artifactId>ctr-online</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.adsame.rtb</groupId>
+            <artifactId>rtb-dual-learner</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.adsame.algorithm</groupId>
+            <artifactId>enhance-server</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
 </project>

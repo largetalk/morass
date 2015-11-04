@@ -1,10 +1,11 @@
 /*
  * Copyright (c) AdSame Corporation. All rights reserved.
  */
-package com.adsame.rtb.smartbid.common.dataset;
+package com.mycompany.allasync.forkjoin;
 
 import com.adsame.rtb.lib.dataset.DataSet;
 import com.adsame.rtb.lib.dataset.Table;
+import com.adsame.rtb.smartbid.common.dataset.SolutionGroupRecord;
 
 public class CommonDataSet extends DataSet {
 
