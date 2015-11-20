@@ -14,6 +14,7 @@ import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.api.java.function.Function2;
 import org.apache.spark.api.java.function.PairFunction;
+import org.apache.spark.storage.StorageLevel;
 import scala.Tuple2;
 
 public class SparkTest {
@@ -39,6 +40,7 @@ public class SparkTest {
                  return Arrays.asList(t.split("="));
              }
          });
+         words.persist(StorageLevel.MEMORY_ONLY());
          
          JavaPairRDD<String, Integer> ones = words.mapToPair(
                  new PairFunction<String, String, Integer>() {

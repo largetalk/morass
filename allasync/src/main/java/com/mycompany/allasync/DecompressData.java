@@ -62,7 +62,7 @@ public class DecompressData {
         if (dataString == null || dataString.isEmpty()) {
             return null;
         }
-        byte compressBytes[] = Base64.decodeBase64(dataString);
+        byte compressBytes[] = Base64.decodeBase64(dataString.getBytes());
         byte message[] = ZlibUtility.decompress(compressBytes);
         if (message == null) {
             return null;
